@@ -44,8 +44,22 @@ derivationSpecification ::
   Idem s (DerivationSpecification s)
 derivationSpecification = undefined
 
-derivationOutputs :: StoreDerivation s -> Idem s (Map Text (StorePath s))
-derivationOutputs = undefined
+{- | A 'StorePath' may only be constructed if it exists in the store. Since a
+ derivation might not be realised, you have two options for obtaining the
+ output paths (which can already be calculated):
 
-build :: StoreDerivation s -> Idem s ()
+ * As strings (for possible later passing to 'pathAlreadyExists')
+
+ * As 'Maybe (StorePath s)'s, which will be 'Nothing' if the derivation is not
+   realised.
+-}
+derivationOutputsUnrealised :: StoreDerivation s -> Idem s (Map Text Text)
+derivationOutputsUnrealised = undefined
+
+derivationOutputsRealised ::
+  StoreDerivation s ->
+  Idem s (Maybe (Map Text (StorePath s)))
+derivationOutputsRealised = undefined
+
+build :: StoreDerivation s -> Idem s (Map Text (StorePath s))
 build = undefined
